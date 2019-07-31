@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+}
+
+group 'com.youxu'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile(
+            // https://mvnrepository.com/artifact/org.springframework/spring-context
+            "org.springframework:spring-context:5.1.8.RELEASE"
+
+    )
+}
