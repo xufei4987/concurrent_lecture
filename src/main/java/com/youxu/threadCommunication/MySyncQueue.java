@@ -45,6 +45,7 @@ public class MySyncQueue<E> {
             }
         }
         E e = arr[removeIdx];
+        arr[removeIdx] = null;
         removeIdx ++;
         count --;
         if(removeIdx == arr.length){
