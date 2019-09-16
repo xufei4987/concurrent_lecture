@@ -11,12 +11,13 @@ import java.util.concurrent.Executors;
  * 在getInstance加上synchronized关键字，但在高并发情况下，效率较低。
  **/
 public class SingletonDemo2 {
-    private SingletonDemo2(){}
+    private SingletonDemo2() {
+    }
 
     private static SingletonDemo2 instance;
 
-    public static synchronized SingletonDemo2 getInstance(){
-        if(instance == null){
+    public static synchronized SingletonDemo2 getInstance() {
+        if (instance == null) {
             try {
                 Thread.sleep(200);
             } catch (InterruptedException e) {
@@ -29,7 +30,7 @@ public class SingletonDemo2 {
 
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newFixedThreadPool(10);
-        for(int i = 0; i < 20; i++){
+        for (int i = 0; i < 20; i++) {
             executorService.execute(() -> System.out.println(Thread.currentThread().getName() + " " + SingletonDemo2.getInstance()));
         }
         executorService.shutdown();

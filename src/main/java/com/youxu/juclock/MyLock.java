@@ -18,8 +18,8 @@ import java.util.concurrent.locks.Lock;
  * !!!!之所以我们应该尽量使用notifyAll()的原因就是，notify()非常容易导致死锁!!!!
  * 当然notifyAll并不一定都是优点，毕竟一次性将Wait Set中的线程都唤醒是一笔不菲的开销，
  * 如果你能handle你的线程调度，那么使用notify()也是有好处的.
- *
- *
+ * <p>
+ * <p>
  * 自定义可重入锁
  **/
 public class MyLock implements Lock {
@@ -32,7 +32,7 @@ public class MyLock implements Lock {
 
     @Override
     public synchronized void lock() {
-        while (locked && lockby != Thread.currentThread()){
+        while (locked && lockby != Thread.currentThread()) {
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -61,9 +61,9 @@ public class MyLock implements Lock {
 
     @Override
     public synchronized void unlock() {
-        if(lockby == Thread.currentThread()){
-            lockCount --;
-            if(lockCount == 0){
+        if (lockby == Thread.currentThread()) {
+            lockCount--;
+            if (lockCount == 0) {
                 locked = false;
                 lockby = null;
                 notifyAll();

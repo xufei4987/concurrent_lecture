@@ -3,7 +3,7 @@ package com.youxu.threadCommunication;
 import java.util.concurrent.TimeUnit;
 
 public class Test03 {
-    public synchronized void get(){
+    public synchronized void get() {
         System.out.println(Thread.currentThread().getName() + "执行了get");
 
         try {
@@ -15,7 +15,7 @@ public class Test03 {
         System.out.println(Thread.currentThread().getName() + "执行get结束");
     }
 
-    public synchronized void set(){
+    public synchronized void set() {
         System.out.println(Thread.currentThread().getName() + "执行了set");
         notifyAll();
         System.out.println(Thread.currentThread().getName() + "休眠3S");
@@ -47,11 +47,11 @@ public class Test03 {
 
 }
 
-class Target1 implements Runnable{
+class Target1 implements Runnable {
 
     private Test03 test03;
 
-    public Target1(Test03 test03){
+    public Target1(Test03 test03) {
         this.test03 = test03;
     }
 
@@ -61,11 +61,11 @@ class Target1 implements Runnable{
     }
 }
 
-class Target2 implements Runnable{
+class Target2 implements Runnable {
 
     private Test03 test03;
 
-    public Target2(Test03 test03){
+    public Target2(Test03 test03) {
         this.test03 = test03;
     }
 

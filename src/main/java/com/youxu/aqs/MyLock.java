@@ -39,7 +39,7 @@ public class MyLock implements Lock {
         return helper.newCondition();
     }
 
-    private class Helper extends AbstractQueuedSynchronizer{
+    private class Helper extends AbstractQueuedSynchronizer {
         @Override
         protected boolean tryAcquire(int arg) {
             //如果第一个线程进来可以拿到锁，返回true
@@ -47,12 +47,12 @@ public class MyLock implements Lock {
             //如何判断是第一个线程进来还是其他线程进来？
             int state = getState();
             Thread curThread = Thread.currentThread();
-            if(state == 0){
-                if (compareAndSetState(0,arg)) {
+            if (state == 0) {
+                if (compareAndSetState(0, arg)) {
                     setExclusiveOwnerThread(Thread.currentThread());
                     return true;
                 }
-            } else if(curThread == getExclusiveOwnerThread()){
+            } else if (curThread == getExclusiveOwnerThread()) {
                 setState(state + 1);
                 return true;
             }
@@ -69,7 +69,7 @@ public class MyLock implements Lock {
 
             int state = getState() - arg;
 
-            if(state == 0){
+            if (state == 0) {
                 flag = true;
                 setExclusiveOwnerThread(null);
             }
@@ -78,7 +78,7 @@ public class MyLock implements Lock {
             return flag;
         }
 
-        private Condition newCondition(){
+        private Condition newCondition() {
             return new ConditionObject();
         }
     }

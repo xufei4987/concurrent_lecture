@@ -11,20 +11,20 @@ import java.util.concurrent.atomic.AtomicIntegerArray;
 public class Sequence {
     private AtomicInteger atomicInteger = new AtomicInteger(0);
 
-    private int[] ints = {2,1,3,4};
+    private int[] ints = {2, 1, 3, 4};
 
     private AtomicIntegerArray atomicIntegerArray = new AtomicIntegerArray(ints);
 
-    public int getNext(){
+    public int getNext() {
 //        return atomicInteger.incrementAndGet();
-        return atomicIntegerArray.addAndGet(3,10);
+        return atomicIntegerArray.addAndGet(3, 10);
     }
 
 
     public static void main(String[] args) {
         Sequence sequence = new Sequence();
         Runnable runnable = () -> {
-            while (true){
+            while (true) {
                 System.out.println(sequence.getNext());
                 try {
                     Thread.sleep(200);

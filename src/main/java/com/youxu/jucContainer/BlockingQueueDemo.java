@@ -12,13 +12,12 @@ public class BlockingQueueDemo {
     private BlockingQueue<Integer> blockingQueue = new ArrayBlockingQueue<>(10);
 
 
-
     public static void main(String[] args) {
 
         BlockingQueueDemo blockingQueueDemo = new BlockingQueueDemo();
 
         Runnable r1 = () -> {
-            while (true){
+            while (true) {
                 try {
                     blockingQueueDemo.blockingQueue.put(1);
                 } catch (InterruptedException e) {
@@ -33,7 +32,7 @@ public class BlockingQueueDemo {
         };
 
         Runnable r2 = () -> {
-            while (true){
+            while (true) {
                 try {
                     blockingQueueDemo.blockingQueue.take();
                 } catch (InterruptedException e) {
@@ -54,7 +53,7 @@ public class BlockingQueueDemo {
         new Thread(r2).start();
         new Thread(r2).start();
 
-        while (true){
+        while (true) {
             System.out.println(blockingQueueDemo.blockingQueue.size());
             try {
                 Thread.sleep(500);

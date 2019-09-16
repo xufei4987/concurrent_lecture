@@ -10,7 +10,7 @@ public class Test02 implements Runnable {
         Thread thread = new Thread(new Test02());
         thread.start();
 
-        new Thread(){
+        new Thread() {
             @Override
             public void run() {
                 System.out.println("thread2 running...");

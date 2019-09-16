@@ -20,11 +20,11 @@ public class Sequence {
     private Lock lock = new MyLock();
 
 
-    public int getNext(){
+    public int getNext() {
         try {
             lock.lock();
             ++value;
-        }finally {
+        } finally {
             lock.unlock();
         }
         return value;
@@ -34,7 +34,7 @@ public class Sequence {
     public static void main(String[] args) {
         Sequence sequence = new Sequence();
         Runnable runnable = () -> {
-            while (true){
+            while (true) {
                 System.out.println(sequence.getNext());
                 try {
                     Thread.sleep(200);

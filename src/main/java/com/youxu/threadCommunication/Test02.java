@@ -7,7 +7,7 @@ public class Test02 {
     public static void main(String[] args) {
         Test02 test01 = new Test02();
         new Thread(() -> {
-            synchronized (test01.lock){
+            synchronized (test01.lock) {
                 try {
                     test01.lock.wait();
                 } catch (InterruptedException e) {

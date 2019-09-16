@@ -10,6 +10,7 @@ import java.util.concurrent.CountDownLatch;
  **/
 public class SpinLockDemo {
     public static CountDownLatch countDownLatch = new CountDownLatch(5);
+
     public static void main(String[] args) throws InterruptedException {
         Runnable r = () -> {
             System.out.println(Thread.currentThread().getName() + ":开始执行。。。");

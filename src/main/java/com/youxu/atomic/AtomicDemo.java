@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class AtomicDemo {
     private AtomicReference<User> userAtomicReference = new AtomicReference<>();
 
-    private AtomicIntegerFieldUpdater<User> updater = AtomicIntegerFieldUpdater.newUpdater(User.class,"age");
+    private AtomicIntegerFieldUpdater<User> updater = AtomicIntegerFieldUpdater.newUpdater(User.class, "age");
 
     public static void main(String[] args) {
         AtomicDemo atomicDemo = new AtomicDemo();

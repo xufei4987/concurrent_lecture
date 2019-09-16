@@ -7,7 +7,7 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
- *读写互斥、写读互斥、写写互斥、读读共享
+ * 读写互斥、写读互斥、写写互斥、读读共享
  */
 public class ReadWriteDemo {
     private Map<String, Object> map = new HashMap<>();
@@ -20,7 +20,7 @@ public class ReadWriteDemo {
 
     private boolean flag = false;
 
-    public Object get(String key){
+    public Object get(String key) {
         try {
             readLock.lock();
             System.out.println(Thread.currentThread() + " 正在读");
@@ -35,12 +35,12 @@ public class ReadWriteDemo {
         }
     }
 
-    public void put(String key, Object object){
+    public void put(String key, Object object) {
         try {
             writeLock.lock();
             System.out.println(Thread.currentThread() + " 正在写");
             Thread.sleep(3000);
-            map.put(key,object);
+            map.put(key, object);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
@@ -50,13 +50,13 @@ public class ReadWriteDemo {
     }
 
     //锁降级  写锁降级为读锁
-    public void readwrite(){
+    public void readwrite() {
         readLock.lock();
-        if(flag){
+        if (flag) {
             readLock.unlock();
 
             writeLock.lock();
-            map.put("xxx","2223");
+            map.put("xxx", "2223");
             readLock.lock();
             writeLock.unlock();
 
@@ -70,13 +70,13 @@ public class ReadWriteDemo {
 
     public static void main(String[] args) throws InterruptedException {
         ReadWriteDemo readWriteDemo = new ReadWriteDemo();
-        readWriteDemo.put("0","aaa");
-        new Thread(()->{
+        readWriteDemo.put("0", "aaa");
+        new Thread(() -> {
             System.out.println(readWriteDemo.get("0"));
         }).start();
         Thread.sleep(100);
-        new Thread(()->{
-            readWriteDemo.put("1","ttt");
+        new Thread(() -> {
+            readWriteDemo.put("1", "ttt");
         }).start();
 //        new Thread(()->{
 //            readWriteDemo.put("2","yyy");

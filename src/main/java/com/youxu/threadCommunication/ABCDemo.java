@@ -4,9 +4,9 @@ public class ABCDemo {
 
     private int signal = 1;
 
-    public synchronized void a(){
+    public synchronized void a() {
 
-        while (signal != 1){
+        while (signal != 1) {
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -18,8 +18,8 @@ public class ABCDemo {
         notifyAll();
     }
 
-    public synchronized void b(){
-        while (signal != 2){
+    public synchronized void b() {
+        while (signal != 2) {
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -31,8 +31,8 @@ public class ABCDemo {
         notifyAll();
     }
 
-    public synchronized void c(){
-        while (signal != 3){
+    public synchronized void c() {
+        while (signal != 3) {
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -56,7 +56,7 @@ public class ABCDemo {
 
 }
 
-class TaskA implements Runnable{
+class TaskA implements Runnable {
     private ABCDemo abcDemo;
 
     public TaskA(ABCDemo abcDemo) {
@@ -65,13 +65,13 @@ class TaskA implements Runnable{
 
     @Override
     public void run() {
-        while (true){
+        while (true) {
             abcDemo.a();
         }
     }
 }
 
-class TaskB implements Runnable{
+class TaskB implements Runnable {
     private ABCDemo abcDemo;
 
     public TaskB(ABCDemo abcDemo) {
@@ -80,13 +80,13 @@ class TaskB implements Runnable{
 
     @Override
     public void run() {
-        while (true){
+        while (true) {
             abcDemo.b();
         }
     }
 }
 
-class TaskC implements Runnable{
+class TaskC implements Runnable {
     private ABCDemo abcDemo;
 
     public TaskC(ABCDemo abcDemo) {
@@ -95,7 +95,7 @@ class TaskC implements Runnable{
 
     @Override
     public void run() {
-        while (true){
+        while (true) {
             abcDemo.c();
         }
     }

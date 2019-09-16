@@ -7,16 +7,17 @@ package com.youxu.lock;
  **/
 public class ReentryLockDemo {
 
-    public synchronized void a(){
+    public synchronized void a() {
         System.out.println("method a");
         b();
     }
-    public synchronized void b(){
+
+    public synchronized void b() {
         System.out.println("method b");
     }
 
     public static void main(String[] args) {
-        new Thread(()->{
+        new Thread(() -> {
             ReentryLockDemo reentryLockDemo = new ReentryLockDemo();
             reentryLockDemo.a();
         }).start();

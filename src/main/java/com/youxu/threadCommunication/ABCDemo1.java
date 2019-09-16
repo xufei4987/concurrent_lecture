@@ -10,11 +10,11 @@ public class ABCDemo1 {
     Condition conditionA = lock.newCondition();
     Condition conditionB = lock.newCondition();
     Condition conditionC = lock.newCondition();
-    private int signal =1;
+    private int signal = 1;
 
-    public void a(){
+    public void a() {
         lock.lock();
-        while (signal != 1){
+        while (signal != 1) {
             try {
                 conditionA.await();
             } catch (InterruptedException e) {
@@ -27,9 +27,9 @@ public class ABCDemo1 {
         lock.unlock();
     }
 
-    public void b(){
+    public void b() {
         lock.lock();
-        while (signal != 2){
+        while (signal != 2) {
             try {
                 conditionB.await();
             } catch (InterruptedException e) {
@@ -41,9 +41,10 @@ public class ABCDemo1 {
         conditionC.signal();
         lock.unlock();
     }
-    public void c(){
+
+    public void c() {
         lock.lock();
-        while (signal != 3){
+        while (signal != 3) {
             try {
                 conditionC.await();
             } catch (InterruptedException e) {
@@ -68,7 +69,7 @@ public class ABCDemo1 {
 
 }
 
-class TaskA1 implements Runnable{
+class TaskA1 implements Runnable {
     private ABCDemo1 abcDemo;
 
     public TaskA1(ABCDemo1 abcDemo) {
@@ -77,13 +78,13 @@ class TaskA1 implements Runnable{
 
     @Override
     public void run() {
-        while (true){
+        while (true) {
             abcDemo.a();
         }
     }
 }
 
-class TaskB1 implements Runnable{
+class TaskB1 implements Runnable {
     private ABCDemo1 abcDemo;
 
     public TaskB1(ABCDemo1 abcDemo) {
@@ -92,13 +93,13 @@ class TaskB1 implements Runnable{
 
     @Override
     public void run() {
-        while (true){
+        while (true) {
             abcDemo.b();
         }
     }
 }
 
-class TaskC1 implements Runnable{
+class TaskC1 implements Runnable {
     private ABCDemo1 abcDemo;
 
     public TaskC1(ABCDemo1 abcDemo) {
@@ -107,7 +108,7 @@ class TaskC1 implements Runnable{
 
     @Override
     public void run() {
-        while (true){
+        while (true) {
             abcDemo.c();
         }
     }

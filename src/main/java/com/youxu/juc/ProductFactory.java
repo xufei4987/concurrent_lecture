@@ -9,9 +9,9 @@ import java.util.Random;
  **/
 public class ProductFactory {
 
-    public static MyFuture createProduct(String name){
+    public static MyFuture createProduct(String name) {
         MyFuture myFuture = new MyFuture();
-        new Thread(()->{
+        new Thread(() -> {
             Product product = new Product(new Random().nextInt(), name);
             myFuture.setProduct(product);
         }).start();

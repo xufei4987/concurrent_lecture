@@ -5,7 +5,7 @@ import java.util.concurrent.Exchanger;
 public class ExchangerDemo {
     public static void main(String[] args) {
         Exchanger<String> exchanger = new Exchanger<>();
-        new Thread(()->{
+        new Thread(() -> {
             try {
                 Thread.sleep(5000);
             } catch (InterruptedException e) {
@@ -19,7 +19,7 @@ public class ExchangerDemo {
             }
         }).start();
 
-        new Thread(()->{
+        new Thread(() -> {
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {

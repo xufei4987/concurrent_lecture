@@ -17,7 +17,7 @@ public class Test01 {
         }).start();
 
         new Thread(() -> {
-            while (!test01.flag){
+            while (!test01.flag) {
                 try {
                     Thread.sleep(200);
                 } catch (InterruptedException e) {

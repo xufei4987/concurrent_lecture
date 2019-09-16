@@ -13,7 +13,7 @@ import java.util.LinkedList;
 public class MyDataSource {
     private LinkedList<Connection> pool = new LinkedList<>();
     private static final int INIT_CONNECTIONS = 10;
-    private static final String DRIVER_CLASS="com.mysql.jdbc.Driver";
+    private static final String DRIVER_CLASS = "com.mysql.jdbc.Driver";
     private String url;
     private String userName;
     private String password;
@@ -27,9 +27,9 @@ public class MyDataSource {
         }
     }
 
-    private MyDataSource(String url,String userName,String password) {
+    private MyDataSource(String url, String userName, String password) {
         try {
-            for (int i = 0; i < INIT_CONNECTIONS; i++){
+            for (int i = 0; i < INIT_CONNECTIONS; i++) {
                 Connection connection = DriverManager.getConnection(url, userName, password);
                 pool.add(connection);
             }
@@ -38,29 +38,28 @@ public class MyDataSource {
         }
     }
 
-    public static MyDataSource getDataSource(String url,String userName,String password){
-        if(dataSource == null){
-            synchronized (MyDataSource.class){
-                if(dataSource == null){
-                    dataSource = new MyDataSource(url,userName,password);
+    public static MyDataSource getDataSource(String url, String userName, String password) {
+        if (dataSource == null) {
+            synchronized (MyDataSource.class) {
+                if (dataSource == null) {
+                    dataSource = new MyDataSource(url, userName, password);
                 }
             }
         }
         return dataSource;
     }
 
-    public Connection getConnection()
-    {
+    public Connection getConnection() {
         Connection connection = null;
-        synchronized (pool){
-            while (pool.size() <= 0){
+        synchronized (pool) {
+            while (pool.size() <= 0) {
                 try {
                     wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-            if(!pool.isEmpty()){
+            if (!pool.isEmpty()) {
                 connection = pool.removeFirst();
             }
         }
@@ -68,9 +67,9 @@ public class MyDataSource {
 
     }
 
-    public void release(Connection connection){
-        if(connection != null){
-            synchronized (pool){
+    public void release(Connection connection) {
+        if (connection != null) {
+            synchronized (pool) {
                 pool.addLast(connection);
                 notifyAll();
             }

@@ -22,29 +22,29 @@ public class ForkJoinDemo extends RecursiveTask<Integer> {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         ForkJoinPool forkJoinPool = new ForkJoinPool();
-        ForkJoinTask forkJoinTask = forkJoinPool.submit(new ForkJoinDemo(1,5000000));
+        ForkJoinTask forkJoinTask = forkJoinPool.submit(new ForkJoinDemo(1, 5000000));
         long start1 = System.currentTimeMillis();
         System.out.println("fork-join计算结果:" + forkJoinTask.get());
         long end1 = System.currentTimeMillis();
         int sum = 0;
         long start2 = System.currentTimeMillis();
-        for (int i = 1; i <= 5000000; i++){
+        for (int i = 1; i <= 5000000; i++) {
             sum += i;
         }
         System.out.println("单线程计算结果:" + sum);
         long end2 = System.currentTimeMillis();
-        System.out.println(end1-start1);
-        System.out.println(end2-start2);
+        System.out.println(end1 - start1);
+        System.out.println(end2 - start2);
     }
 
     @Override
     protected Integer compute() {
         int sum = 0;
-        if(begin +1 == end){
+        if (begin + 1 == end) {
             sum = begin + end;
-        }else if(begin == end){
+        } else if (begin == end) {
             sum = begin;
-        }else {
+        } else {
 
             ForkJoinDemo fork1 = new ForkJoinDemo(begin, (begin + end) / 2);
             ForkJoinDemo fork2 = new ForkJoinDemo((begin + end) / 2 + 1, end);

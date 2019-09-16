@@ -9,16 +9,16 @@ public class MySyncQueue<E> {
     private Lock lock = new ReentrantLock();
     Condition needRm = lock.newCondition();
     Condition needAdd = lock.newCondition();
-    private int addIdx,removeIdx,count;
+    private int addIdx, removeIdx, count;
     private E[] arr;
 
-    public MySyncQueue(int capacity){
+    public MySyncQueue(int capacity) {
         arr = (E[]) new Object[capacity];
     }
 
-    public void add(E e){
+    public void add(E e) {
         lock.lock();
-        while (count == arr.length){
+        while (count == arr.length) {
             try {
                 needAdd.await();
             } catch (InterruptedException e1) {
@@ -28,16 +28,16 @@ public class MySyncQueue<E> {
         arr[addIdx] = e;
         addIdx++;
         count++;
-        if(addIdx == arr.length){
+        if (addIdx == arr.length) {
             addIdx = 0;
         }
         needRm.signalAll();
         lock.unlock();
     }
 
-    public E remove(){
+    public E remove() {
         lock.lock();
-        while (count == 0){
+        while (count == 0) {
             try {
                 needRm.await();
             } catch (InterruptedException e) {
@@ -46,9 +46,9 @@ public class MySyncQueue<E> {
         }
         E e = arr[removeIdx];
         arr[removeIdx] = null;
-        removeIdx ++;
-        count --;
-        if(removeIdx == arr.length){
+        removeIdx++;
+        count--;
+        if (removeIdx == arr.length) {
             removeIdx = 0;
         }
         needAdd.signalAll();
@@ -58,8 +58,8 @@ public class MySyncQueue<E> {
 
     public static void main(String[] args) {
         MySyncQueue<String> stringMySyncQueue = new MySyncQueue<>(10);
-        Runnable runnable = ()->{
-            while (true){
+        Runnable runnable = () -> {
+            while (true) {
                 stringMySyncQueue.add(UUID.randomUUID().toString());
                 try {
                     Thread.sleep(200);
@@ -71,8 +71,8 @@ public class MySyncQueue<E> {
         new Thread(runnable).start();
         new Thread(runnable).start();
         new Thread(runnable).start();
-        new Thread(()-> {
-            while (true){
+        new Thread(() -> {
+            while (true) {
                 System.out.println(stringMySyncQueue.remove());
                 try {
                     Thread.sleep(100);

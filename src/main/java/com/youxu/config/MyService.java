@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 public class MyService {
 
     @Async
-    public void service1(){
-        while (true){
+    public void service1() {
+        while (true) {
             System.out.println("service1 running ...");
             try {
                 Thread.sleep(200);
@@ -19,8 +19,8 @@ public class MyService {
     }
 
     @Async
-    public void service2(){
-        while (true){
+    public void service2() {
+        while (true) {
             System.out.println("service2 running ...");
             try {
                 Thread.sleep(200);

@@ -8,26 +8,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
-public class CountDownLatchDemo{
+public class CountDownLatchDemo {
     private int[] nums;
 
-    public CountDownLatchDemo(int line){
+    public CountDownLatchDemo(int line) {
         nums = new int[line];
     }
 
-    public void compute(String line, int row){
+    public void compute(String line, int row) {
         String[] strings = line.split(",");
         int total = 0;
-        for (String s : strings){
+        for (String s : strings) {
             total = total + Integer.parseInt(s);
         }
         nums[row] = total;
         System.out.println(Thread.currentThread().getName() + "执行计算任务：" + line + " 计算结果为:" + total);
     }
 
-    public void sum(){
+    public void sum() {
         int total = 0;
-        for (int i = 0; i < nums.length; i++){
+        for (int i = 0; i < nums.length; i++) {
             total += nums[i];
         }
         System.out.println("总的计算结果为：" + total);
@@ -41,7 +41,7 @@ public class CountDownLatchDemo{
 
         CountDownLatch countDownLatch = new CountDownLatch(contents.size());
 
-        for(int i = 0 ; i < contents.size(); i++){
+        for (int i = 0; i < contents.size(); i++) {
             int finalI = i;
             new Thread(() -> {
                 countDownLatchDemo.compute(contents.get(finalI), finalI);
@@ -67,14 +67,14 @@ public class CountDownLatchDemo{
 
             fileReader = new FileReader(filePath);
             bufferedReader = new BufferedReader(fileReader);
-            while ((line = bufferedReader.readLine()) != null){
+            while ((line = bufferedReader.readLine()) != null) {
                 contents.add(line);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 bufferedReader.close();
                 fileReader.close();

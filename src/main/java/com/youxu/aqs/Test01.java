@@ -3,27 +3,27 @@ package com.youxu.aqs;
 import java.util.concurrent.locks.Lock;
 
 public class Test01 {
-    
+
     private int value;
 
     private Lock lock = new MyLock();
-    
-    public int next(){
+
+    public int next() {
         try {
             lock.lock();
             return ++value;
-        }finally {
+        } finally {
             lock.unlock();
         }
 
     }
 
-    public void a(){
+    public void a() {
         try {
             lock.lock();
             System.out.println("a");
             b();
-        }finally {
+        } finally {
             lock.unlock();
         }
 
@@ -33,7 +33,7 @@ public class Test01 {
         try {
             lock.lock();
             System.out.println("b");
-        }finally {
+        } finally {
             lock.unlock();
         }
 

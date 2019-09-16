@@ -10,21 +10,21 @@ import java.util.concurrent.locks.Lock;
 public class ReentryLockDemo {
     private Lock lock = new MyLock();
 
-    public void method1(){
+    public void method1() {
         lock.lock();
         System.out.println("method1 invoked...");
         method2();
         lock.unlock();
     }
 
-    public void method2(){
+    public void method2() {
         lock.lock();
         System.out.println("method2 invoked...");
         method3();
         lock.unlock();
     }
 
-    public void method3(){
+    public void method3() {
         lock.lock();
         System.out.println("method3 invoked...");
         lock.unlock();

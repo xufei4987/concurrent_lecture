@@ -6,9 +6,9 @@ public class TreadLocalDemo {
 
     private ThreadLocal<Integer> tl = ThreadLocal.withInitial(() -> new Integer(0));
 
-    public int getNext(){
+    public int getNext() {
         Integer val = tl.get();
-        val ++ ;
+        val++;
         tl.set(val);
         return val;
     }
@@ -16,7 +16,7 @@ public class TreadLocalDemo {
     public static void main(String[] args) {
         TreadLocalDemo treadLocalDemo = new TreadLocalDemo();
         Runnable r = () -> {
-            while (true){
+            while (true) {
                 System.out.println(Thread.currentThread().getName() + ":" + treadLocalDemo.getNext());
                 int i = new Random().nextInt(2000);
                 try {

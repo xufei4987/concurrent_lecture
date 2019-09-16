@@ -9,29 +9,29 @@ public class DeathLockDemo {
     private Object object1 = new Object();
     private Object object2 = new Object();
 
-    public void a(){
-        synchronized (object1){
+    public void a() {
+        synchronized (object1) {
             System.out.println(Thread.currentThread().getName() + ":获取锁object1");
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            synchronized (object2){
+            synchronized (object2) {
                 System.out.println(Thread.currentThread().getName() + ":获取锁object2");
             }
         }
     }
 
-    public void b(){
-        synchronized (object2){
+    public void b() {
+        synchronized (object2) {
             System.out.println(Thread.currentThread().getName() + ":获取锁object2");
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            synchronized (object1){
+            synchronized (object1) {
                 System.out.println(Thread.currentThread().getName() + ":获取锁object1");
             }
         }
